@@ -2,8 +2,8 @@ package com.jaimerson.thecyrpt
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,8 +13,10 @@ class MainActivity : AppCompatActivity() {
 
         val chats = arrayOf(Chat(), Chat())
 
-        val adapter = DialogsListAdapter<Chat>(new ImageLoader() {
-            
-        })
+        val dialogsListAdapter = DialogsListAdapter<Chat>(ImageLoader())
+
+        dialogsListAdapter.setItems(chats.toMutableList())
+
+        dialogsList.setAdapter(dialogsListAdapter)
     }
 }
