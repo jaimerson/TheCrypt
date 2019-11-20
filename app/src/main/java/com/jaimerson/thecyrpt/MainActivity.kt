@@ -1,8 +1,12 @@
 package com.jaimerson.thecyrpt
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.jaimerson.thecyrpt.data.LoginDataSource
+import com.jaimerson.thecyrpt.data.LoginRepository
+import com.jaimerson.thecyrpt.ui.login.LoginActivity
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
