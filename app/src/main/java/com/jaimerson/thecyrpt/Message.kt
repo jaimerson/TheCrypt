@@ -14,7 +14,7 @@ class Message : IMessage{
     }
 
     override fun getUser(): IUser {
-        return User()
+        return User("", "")
     }
 
     override fun getText(): String {

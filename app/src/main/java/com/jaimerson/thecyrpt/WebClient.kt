@@ -8,12 +8,12 @@ class WebClient {
 
     constructor(){
         this.retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.21:3000")
+            .baseUrl("http://10.51.68.57:3000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    fun chatService(){
-        this.retrofit.create(ChatService::class.java)
+    fun chatService() : ChatService{
+        return this.retrofit.create(ChatService::class.java)
     }
 }

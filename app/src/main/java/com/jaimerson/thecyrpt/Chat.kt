@@ -22,7 +22,7 @@ class Chat : IDialog<IMessage> {
     }
 
     override fun getUsers(): MutableList<out IUser> {
-        return arrayOf(User()).toMutableList()
+        return arrayOf(User("", "")).toMutableList()
     }
 
     override fun getLastMessage(): IMessage {
