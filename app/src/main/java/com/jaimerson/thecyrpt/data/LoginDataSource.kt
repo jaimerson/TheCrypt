@@ -50,7 +50,7 @@ class LoginDataSource {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if(response.isSuccessful()){
                     val user = LoggedInUser(username, username)
-                    savePrivateKey(privateKey, username)
+                    saveSettings(username, privateKey, publicKey)
                     onSuccess(Result.Success(user))
                 }else{
                     onFailure(Result.Error(IOException(response.body().toString())))
@@ -63,8 +63,8 @@ class LoginDataSource {
         })
     }
 
-    private fun savePrivateKey(privateKey: String, username: String) {
-        DatabaseThing.savePrivateKey(username, privateKey)
+    private fun saveSettings(username: String, privateKey: String, publicKey: String) {
+        DatabaseThing.saveSettings(username, privateKey, publicKey)
     }
 
     fun logout() {

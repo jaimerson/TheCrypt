@@ -8,7 +8,8 @@ class WebClient {
 
     constructor(){
         this.retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.21:3000")
+            .baseUrl("https://thecryptserver.herokuapp.com")
+            //.baseUrl("http://192.168.0.21:3000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -25,7 +25,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db?.execSQL("""
             CREATE TABLE $SETTINGS_TABLE_NAME (
                 username TEXT NOT NULL,
-                private_key TEXT NOT NULL
+                private_key TEXT NOT NULL,
+                public_key TEXT NOT NULL
             );
         """.trimIndent())
     }
@@ -39,7 +40,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         const val DATABASE_NAME = "TheCrypt"
-        const val DATABASE_VERSION = 5
+        const val DATABASE_VERSION = 6
         const val CHATS_TABLE_NAME = "chats"
         const val MESSAGES_TABLE_NAME = "messages"
         const val SETTINGS_TABLE_NAME = "settings"

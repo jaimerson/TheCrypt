@@ -10,12 +10,12 @@ class DatabaseThing {
             this.databaseHelper = DatabaseHelper(context)
         }
 
-        fun savePrivateKey(username: String, privateKey: String){
+        fun saveSettings(username: String, privateKey: String, publicKey: String){
             val connection = this.databaseHelper!!.writableDatabase
 
             connection.execSQL("""
-                INSERT INTO ${DatabaseHelper.SETTINGS_TABLE_NAME} (username, private_key)
-                VALUES ("$username", "$privateKey");
+                INSERT INTO ${DatabaseHelper.SETTINGS_TABLE_NAME} (username, private_key, public_key)
+                VALUES ("$username", "$privateKey", "$publicKey");
             """.trimIndent())
 
             connection.close()
