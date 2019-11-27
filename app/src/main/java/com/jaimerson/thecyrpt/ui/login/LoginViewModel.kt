@@ -26,6 +26,16 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         })
     }
 
+    fun signUp(username: String, password: String) {
+        // can be launched in a separate asynchronous job
+        loginRepository.signUp(username, password, onSuccess = { result ->
+            _loginResult.value =
+                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+        }, onFailure = { error ->
+            _loginResult.value = LoginResult(error = error.exception.message)
+        })
+    }
+
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
             _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)

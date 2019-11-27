@@ -38,6 +38,17 @@ class LoginRepository(val dataSource: LoginDataSource) {
         }, onFailure = onFailure)
     }
 
+    fun signUp(username: String,
+              password: String,
+              onSuccess: (Result.Success<LoggedInUser>) -> Unit = {},
+              onFailure: (Result.Error) -> Unit = {}
+    ) {
+        dataSource.signUp(username, password, onSuccess = { result ->
+            setLoggedInUser(result.data)
+            onSuccess(result)
+        }, onFailure = onFailure)
+    }
+
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {
         this.user = loggedInUser
         // If user credentials will be cached in local storage, it is recommended it be encrypted

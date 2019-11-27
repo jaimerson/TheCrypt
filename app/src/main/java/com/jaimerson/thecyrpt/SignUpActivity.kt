@@ -1,11 +1,9 @@
-package com.jaimerson.thecyrpt.ui.login
+package com.jaimerson.thecyrpt
 
 import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -14,36 +12,29 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.jaimerson.thecyrpt.DatabaseThing
-import com.jaimerson.thecyrpt.MainActivity
-
-import com.jaimerson.thecyrpt.R
-import com.jaimerson.thecyrpt.SignUpActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.jaimerson.thecyrpt.ui.login.LoggedInUserView
+import com.jaimerson.thecyrpt.ui.login.LoginViewModel
+import com.jaimerson.thecyrpt.ui.login.LoginViewModelFactory
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DatabaseThing.initialize(applicationContext)
-
-        setContentView(R.layout.activity_login)
-
+        setContentView(R.layout.activity_sign_up)
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        btn_register.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-        }
-
         loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
+        loginViewModel.loginFormState.observe(this@SignUpActivity, Observer {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
@@ -57,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
+        loginViewModel.loginResult.observe(this@SignUpActivity, Observer {
             val loginResult = it ?: return@Observer
 
             loading.visibility = View.GONE
@@ -88,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
+                        loginViewModel.signUp(
                             username.text.toString(),
                             password.text.toString()
                         )
@@ -98,7 +89,7 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                loginViewModel.signUp(username.text.toString(), password.text.toString())
             }
         }
     }
